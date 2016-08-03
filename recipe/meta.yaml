@@ -18,9 +18,9 @@ requirements:
   build:
     - curl           # [win]
     - 7za            # [win]
-    - vc{{ VC_VERSION }}   # [win]
+    - vc {{ VC_VERSION }}  # [win]
   run:
-    - vc{{ VC_VERSION }}   # [win]
+    - vc {{ VC_VERSION }}  # [win]
 
 test:
 

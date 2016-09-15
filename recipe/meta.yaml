@@ -16,7 +16,6 @@ build:
 
 requirements:
   build:
-    - python         # [win]
     - curl           # [win]
     - 7za            # [win]
     - vc {{ VC_VERSION }}  # [win]

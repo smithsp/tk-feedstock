@@ -4,8 +4,8 @@ if "%ARCH%"=="32" (
   set MACHINE="AMD64"
 )
 
-curl -L -o tcl%PKG_VERSION%.tar.gz "ftp://ftp.tcl.tk/pub/tcl/tcl8_6/tcl%PKG_VERSION%-src.tar.gz"
-curl -L -o tk%PKG_VERSION%.tar.gz "ftp://ftp.tcl.tk/pub/tcl/tcl8_6/tk%PKG_VERSION%-src.tar.gz"
+curl -L -o tcl%PKG_VERSION%.tar.gz "ftp://ftp.tcl.tk/pub/tcl/tcl8_5/tcl%PKG_VERSION%-src.tar.gz"
+curl -L -o tk%PKG_VERSION%.tar.gz "ftp://ftp.tcl.tk/pub/tcl/tcl8_5/tk%PKG_VERSION%-src.tar.gz"
 
 7za x -so tcl%PKG_VERSION%.tar.gz | 7za x -si -aoa -ttar
 7za x -so tk%PKG_VERSION%.tar.gz | 7za x -si -aoa -ttar
@@ -26,7 +26,4 @@ nmake -f makefile.vc all install INSTALLDIR=%LIBRARY_PREFIX% MACHINE=%MACHINE% T
 if %ERRORLEVEL% GTR 0 exit 1
 
 :: Make sure that `wish` can be called without the version info.
-copy %LIBRARY_PREFIX%\bin\wish86t.exe %LIBRARY_PREFIX%\bin\wish.exe
-
-:: No `t` version of wish86.exe
-copy %LIBRARY_PREFIX%\bin\wish86t.exe %LIBRARY_PREFIX%\bin\wish86.exe
+copy %LIBRARY_PREFIX%\bin\wish85.exe %LIBRARY_PREFIX%\bin\wish.exe

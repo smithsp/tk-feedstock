@@ -19,6 +19,7 @@ cd $SRC_DIR/tcl${VER}/unix
 ./configure \
 	--prefix="${PREFIX}" \
 	$ARCH_FLAG \
+	 --enable-threads \
 
 make
 make install
@@ -29,6 +30,7 @@ cd $SRC_DIR/tk${VER}/unix
 	$ARCH_FLAG \
 	--with-tcl="${PREFIX}/lib" \
 	--enable-aqua=yes \
+	--enable-threads \
 
 make
 make install

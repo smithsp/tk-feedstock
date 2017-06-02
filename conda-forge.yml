@@ -2,7 +2,6 @@
 #
 #matrix:
 #  - [[VC_VERSION, 9], [CONDA_PY, 27]]
-#  - [[VC_VERSION, 10], [CONDA_PY, 34]]
 #  - [[VC_VERSION, 14], [CONDA_PY, 35]]
 
 travis:

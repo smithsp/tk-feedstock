@@ -9,7 +9,7 @@ package:
   version: {{ version }}
 
 build:
-  number: 4
+  number: 5
   detect_binary_files_with_prefix: true
   features:
     - vc{{ VC_VERSION }}   # [win]
@@ -33,6 +33,7 @@ test:
     - test -f "${PREFIX}/bin/tclsh{{ ver_suffix }}"                                            # [unix]
     - test -f "${PREFIX}/bin/wish{{ ver_suffix }}"                                             # [unix]
     - if not exist %LIBRARY_PREFIX%\\bin\\wish{{ ver_suffix.replace(".", "") }}.exe exit 1     # [win]
+    - if not exist %LIBRARY_PREFIX%\\bin\\tclsh{{ ver_suffix.replace(".", "") }}.exe exit 1    # [win]
     {% endfor %}
 
     # Check for includes.
@@ -69,11 +70,12 @@ test:
     {% endfor %}
 
     # Check commands work and run a simple program.
-    - tclsh hello.tcl                                    # [unix]
+    - tclsh hello.tcl
     - tclsh{{ maj_min }} hello.tcl                       # [unix]
+    - tclsh{{ maj_min.replace(".", "") }} hello.tcl      # [win]
     - wish hello.tcl
     - wish{{ maj_min }} hello.tcl                        # [unix]
-    - wish{{ maj_min.replace(".", "") }}t hello.tcl       # [win]
+    - wish{{ maj_min.replace(".", "") }}t hello.tcl      # [win]
 
 about:
   home: http://www.tcl.tk/

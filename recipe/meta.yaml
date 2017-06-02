@@ -33,7 +33,7 @@ test:
     - test -f "${PREFIX}/bin/tclsh{{ ver_suffix }}"                                            # [unix]
     - test -f "${PREFIX}/bin/wish{{ ver_suffix }}"                                             # [unix]
     - if not exist %LIBRARY_PREFIX%\\bin\\wish{{ ver_suffix.replace(".", "") }}.exe exit 1     # [win]
-    - if not exist %LIBRARY_PREFIX%\\bin\\tclsh{{ ver_suffix.replace(".", "") }}.exe exit 1     # [win]
+    - if not exist %LIBRARY_PREFIX%\\bin\\tclsh{{ ver_suffix.replace(".", "") }}.exe exit 1    # [win]
     {% endfor %}
 
     # Check for includes.

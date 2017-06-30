@@ -1,8 +1,7 @@
-# Uncomment for Windows re-rendering only.
-#
-#matrix:
-#  - [[VC_VERSION, 9], [CONDA_PY, 27]]
-#  - [[VC_VERSION, 14], [CONDA_PY, 35]]
+matrix:
+  - []
+  - [[VC_VERSION, 9], [CONDA_PY, 27]]
+  - [[VC_VERSION, 14], [CONDA_PY, 35]]
 
 travis:
   secure:

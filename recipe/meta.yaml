@@ -2,7 +2,7 @@
 {% set maj_min = ".".join(version.split(".")[:2]) %}
 {% set majmin = "".join(version.split(".")[:2]) %}
 
-{% set VC_VERSION = os.environ.get('VC_VERSION', '9')|string %}
+{% set VC_VERSION = os.environ.get("VC_VERSION", "")|string %}
 
 package:
   name: tk
@@ -11,6 +11,13 @@ package:
 build:
   number: 5
   detect_binary_files_with_prefix: true
+
+{% if VC_VERSION == "" %}
+  skip: true               # [win]
+{% elif VC_VERSION != "" %}
+  skip: true               # [unix]
+{% endif %}
+
   features:
     - vc{{ VC_VERSION }}   # [win]
 

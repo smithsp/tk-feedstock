@@ -1,4 +1,4 @@
-{% set version = "8.6.6" %}
+{% set version = "8.6.7" %}
 {% set maj_min = ".".join(version.split(".")[:2]) %}
 {% set majmin = "".join(version.split(".")[:2]) %}
 
@@ -9,7 +9,7 @@ package:
   version: {{ version }}
 
 build:
-  number: 5
+  number: 0
   detect_binary_files_with_prefix: true
 
 {% if VC_VERSION == "" %}
@@ -96,3 +96,4 @@ extra:
     - jjhelmus
     - msarahan
     - pelson
+    - ocefpaf

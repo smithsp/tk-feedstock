@@ -19,8 +19,10 @@ requirements:
     - curl           # [win]
     - 7za            # [win]
     - vc {{ VC_VERSION }}  # [win]
+    - freetype
   run:
     - vc {{ VC_VERSION }}  # [win]
+    - freetype
 
 test:
 

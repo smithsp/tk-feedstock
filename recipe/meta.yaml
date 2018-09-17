@@ -1,33 +1,38 @@
 {% set version = "8.6.8" %}
 {% set maj_min = ".".join(version.split(".")[:2]) %}
-{% set majmin = "".join(version.split(".")[:2]) %}
-
-{% set VC_VERSION = os.environ.get("VC_VERSION", "")|string %}
 
 package:
   name: tk
   version: {{ version }}
 
+source:
+  - url: https://downloads.sourceforge.net/tcl/tcl{{ version }}-src.tar.gz
+    folder: tcl{{ version }}
+    sha256: c43cb0c1518ce42b00e7c8f6eaddd5195c53a98f94adc717234a65cbcfd3f96a
+  - url: https://downloads.sourceforge.net/tcl/tk{{ version }}-src.tar.gz
+    folder: tk{{ version }}
+    sha256: 49e7bca08dde95195a27f594f7c850b088be357a7c7096e44e1158c7a5fd7b33
+    patches:
+      # https://trac.macports.org/ticket/55649
+      - patch-macosx-tkMacOSXXStubs.c.diff  # [osx]
+
 build:
   number: 0
   detect_binary_files_with_prefix: true
-
-{% if VC_VERSION == "" %}
-  skip: true               # [win]
-{% elif VC_VERSION != "" %}
-  skip: true               # [unix]
-{% endif %}
-
-  features:
-    - vc{{ VC_VERSION }}   # [win]
+  run_exports:
+    # pin to major.minor because library names have that info in them
+    - {{ pin_subpackage('tk', max_pin='x.x') }}
 
 requirements:
   build:
-    - curl           # [win]
-    - 7za            # [win]
-    - vc {{ VC_VERSION }}  # [win]
-  run:
-    - vc {{ VC_VERSION }}  # [win]
+    - {{ compiler('c') }}
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('libx11-devel') }}          # [linux]
+    - {{ cdt('libxcb') }}                # [linux]
+    - {{ cdt('libxau') }}                # [linux]
+    - make                               # [linux]
+  host:
+    - zlib  # [unix]
 
 test:
 
@@ -80,8 +85,11 @@ test:
     - tclsh hello.tcl
     - tclsh{{ maj_min }} hello.tcl                       # [unix]
     - tclsh{{ maj_min.replace(".", "") }} hello.tcl      # [win]
-    - wish hello.tcl
-    - wish{{ maj_min }} hello.tcl                        # [unix]
+    # wish requires X11:
+    # wish: error while loading shared libraries: libX11.so.6: cannot open shared object file: No such file or directory
+    # The time has come to figure out how to handle missing system dependencies. cc @msarahan
+    # - wish hello.tcl
+    # - wish{{ maj_min }} hello.tcl                      # [unix]
     - wish{{ maj_min.replace(".", "") }}t hello.tcl      # [win]
 
 about:
@@ -96,4 +104,4 @@ extra:
     - jjhelmus
     - msarahan
     - pelson
-    - ocefpaf
+    - mingwandroid

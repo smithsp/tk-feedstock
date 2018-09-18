@@ -17,7 +17,7 @@ source:
       - patch-macosx-tkMacOSXXStubs.c.diff  # [osx]
 
 build:
-  number: 0
+  number: 1000
   detect_binary_files_with_prefix: true
   run_exports:
     # pin to major.minor because library names have that info in them

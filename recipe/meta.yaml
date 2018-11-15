@@ -1,4 +1,4 @@
-{% set version = "8.6.8" %}
+{% set version = "8.6.9" %}
 {% set maj_min = ".".join(version.split(".")[:2]) %}
 
 package:
@@ -8,10 +8,10 @@ package:
 source:
   - url: https://downloads.sourceforge.net/tcl/tcl{{ version }}-src.tar.gz
     folder: tcl{{ version }}
-    sha256: c43cb0c1518ce42b00e7c8f6eaddd5195c53a98f94adc717234a65cbcfd3f96a
+    sha256: 04abaa207f4bf4f453bea5bbdbcf6cf4bcdba3ed1c5160bfd732c6b8c70c6269
   - url: https://downloads.sourceforge.net/tcl/tk{{ version }}-src.tar.gz
     folder: tk{{ version }}
-    sha256: 49e7bca08dde95195a27f594f7c850b088be357a7c7096e44e1158c7a5fd7b33
+    sha256: f8ecce4a176e04870ba096971c3d12a3d78d4d3745337bc67dd947786e4c191c
     patches:
       # https://trac.macports.org/ticket/55649
       - patch-macosx-tkMacOSXXStubs.c.diff  # [osx]

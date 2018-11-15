@@ -12,9 +12,6 @@ source:
   - url: https://downloads.sourceforge.net/tcl/tk{{ version }}-src.tar.gz
     folder: tk{{ version }}
     sha256: f8ecce4a176e04870ba096971c3d12a3d78d4d3745337bc67dd947786e4c191c
-    patches:
-      # https://trac.macports.org/ticket/55649
-      - patch-macosx-tkMacOSXXStubs.c.diff  # [osx]
 
 build:
   number: 1000

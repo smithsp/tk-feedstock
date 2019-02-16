@@ -38,20 +38,39 @@ DOCKER_IMAGE=$(cat "${FEEDSTOCK_ROOT}/.ci_support/${CONFIG}.yaml" | shyaml get-v
 mkdir -p "$ARTIFACTS"
 DONE_CANARY="$ARTIFACTS/conda-forge-build-done-${CONFIG}"
 rm -f "$DONE_CANARY"
+
+# Set up the docker image that we are going to use.  This is used to install yum requirements at build time if needed
+docker pull $DOCKER_IMAGE
+
+pushd ${RECIPE_ROOT}
+if [ -f ${RECIPE_ROOT}/yum_requirements.txt ]; then
+
+    cat >Dockerfile.yum <<DOCKERFILE
+FROM ${DOCKER_IMAGE}
+ADD yum_requirements.txt /opt/requirements.txt
+RUN yum -y install $(cat /opt/requirements.txt)
+DOCKERFILE
+
+    export NEW_DOCKER_IMAGE="conda-smithy-$(openssl rand -hex 12)"
+    docker build -t ${NEW_DOCKER_IMAGE} --file Dockerfile.yum
+    export DOCKER_IMAGE=$NEW_DOCKER_IMAGE
+    echo "Generated new image!"
+fi
+popd
 # Enable running in interactive mode attached to a tty
 DOCKER_RUN_ARGS=" -it "
 
 export UPLOAD_PACKAGES="${UPLOAD_PACKAGES:-True}"
 docker run ${DOCKER_RUN_ARGS} \
-           -v "${RECIPE_ROOT}":/home/conda/recipe_root:ro,z \
-           -v "${FEEDSTOCK_ROOT}":/home/conda/feedstock_root:rw,z \
-           -e CONFIG \
-           -e BINSTAR_TOKEN \
-           -e HOST_USER_ID \
-           -e UPLOAD_PACKAGES \
-           $DOCKER_IMAGE \
-           bash \
-           /home/conda/feedstock_root/${PROVIDER_DIR}/build_steps.sh
+    -v "${RECIPE_ROOT}":/home/conda/recipe_root:ro,z \
+    -v "${FEEDSTOCK_ROOT}":/home/conda/feedstock_root:rw,z \
+    -e CONFIG \
+    -e BINSTAR_TOKEN \
+    -e HOST_USER_ID \
+    -e UPLOAD_PACKAGES \
+    $DOCKER_IMAGE \
+    bash \
+    /home/conda/feedstock_root/${PROVIDER_DIR}/build_steps.sh
 
 # verify that the end of the script was reached
 test -f "$DONE_CANARY"

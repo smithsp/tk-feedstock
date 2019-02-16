@@ -48,11 +48,11 @@ if [ -f ${RECIPE_ROOT}/yum_requirements.txt ]; then
     cat >Dockerfile.yum <<DOCKERFILE
 FROM ${DOCKER_IMAGE}
 ADD yum_requirements.txt /opt/requirements.txt
-RUN yum -y install $(cat /opt/requirements.txt)
+RUN yum -y install \$(cat /opt/requirements.txt)
 DOCKERFILE
 
     export NEW_DOCKER_IMAGE="conda-smithy-$(openssl rand -hex 12)"
-    docker build -t ${NEW_DOCKER_IMAGE} --file Dockerfile.yum
+    docker build -t ${NEW_DOCKER_IMAGE} --file Dockerfile.yum .
     export DOCKER_IMAGE=$NEW_DOCKER_IMAGE
     echo "Generated new image!"
 fi

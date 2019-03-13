@@ -13,7 +13,7 @@ pushd tcl${PKG_VERSION}/unix
                --host=${HOST}        \
                ${ARCH_FLAG}
   make -j${CPU_COUNT} ${VERBOSE_AT}
-  make install
+  make install install-private-headers
 popd
 
 pushd tk${PKG_VERSION}/unix

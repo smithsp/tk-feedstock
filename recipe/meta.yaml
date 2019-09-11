@@ -14,7 +14,7 @@ source:
     sha256: d3f9161e8ba0f107fe8d4df1f6d3a14c30cc3512dfc12a795daa367a27660dac
 
 build:
-  number: 1002
+  number: 1003
   detect_binary_files_with_prefix: true
   run_exports:
     # pin to major.minor because library names have that info in them
@@ -82,17 +82,15 @@ test:
     - tclsh hello.tcl
     - tclsh{{ maj_min }} hello.tcl                       # [unix]
     - tclsh{{ maj_min.replace(".", "") }} hello.tcl      # [win]
-    # wish requires X11:
-    # wish: error while loading shared libraries: libX11.so.6: cannot open shared object file: No such file or directory
-    # The time has come to figure out how to handle missing system dependencies. cc @msarahan
-    # - wish hello.tcl
-    # - wish{{ maj_min }} hello.tcl                      # [unix]
+    - wish hello.tcl
+    - wish{{ maj_min }} hello.tcl                        # [unix]
     - wish{{ maj_min.replace(".", "") }}t hello.tcl      # [win]
 
 about:
   home: http://www.tcl.tk/
   license: Tcl/Tk
   license_family: BSD
+  license_file: tcl{{ version }}/license.terms
   summary: A dynamic programming language with GUI support.  Bundles Tcl and Tk.
 
 extra:

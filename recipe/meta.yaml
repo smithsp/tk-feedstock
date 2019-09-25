@@ -30,6 +30,9 @@ requirements:
     - make                               # [linux]
   host:
     - zlib  # [unix]
+    - xorg-libx11                        # [osx]
+  run:
+    - xorg-libx11                        # [osx]
 
 test:
 

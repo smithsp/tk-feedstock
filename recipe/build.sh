@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo pineapple
+echo ${PREFIX}
+echo ${CONDA_PREFIX}
+
 IFS="." read -a VER_ARR <<<"${PKG_VERSION}"
 
 ARCH_FLAG=""
@@ -21,7 +25,7 @@ pushd tk${PKG_VERSION}/unix
   ./configure --prefix="${PREFIX}"        \
               --host=${HOST}              \
               --with-tcl="${PREFIX}"/lib  \
-              --enable-aqua=yes           \
+              --enable-aqua=no           \
               ${ARCH_FLAG}
   make -j${CPU_COUNT} ${VERBOSE_AT}
   make install

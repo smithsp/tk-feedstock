@@ -33,6 +33,11 @@ requirements:
     - freetype  # [unix]
     - fontconfig  # [unix]
     - xorg-libxft  # [unix]
+  run:
+    - zlib  # [unix]
+    - freetype  # [unix]
+    - fontconfig  # [unix]
+    - xorg-libxft  # [unix]
 
 test:
 

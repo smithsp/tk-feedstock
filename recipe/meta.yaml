@@ -1,4 +1,4 @@
-{% set version = "8.6.9" %}
+{% set version = "8.6.10" %}
 {% set maj_min = ".".join(version.split(".")[:2]) %}
 
 package:
@@ -8,13 +8,13 @@ package:
 source:
   - url: https://downloads.sourceforge.net/tcl/tcl{{ version }}-src.tar.gz
     folder: tcl{{ version }}
-    sha256: ad0cd2de2c87b9ba8086b43957a0de3eb2eb565c7159d5f53ccbba3feb915f4e
+    sha256: 5196dbf6638e3df8d5c87b5815c8c2b758496eb6f0e41446596c9a4e638d87ed
   - url: https://downloads.sourceforge.net/tcl/tk{{ version }}-src.tar.gz
     folder: tk{{ version }}
-    sha256: d3f9161e8ba0f107fe8d4df1f6d3a14c30cc3512dfc12a795daa367a27660dac
+    sha256: 63df418a859d0a463347f95ded5cd88a3dd3aaa1ceecaeee362194bc30f3e386
 
 build:
-  number: 1003
+  number: 0
   detect_binary_files_with_prefix: true
   run_exports:
     # pin to major.minor because library names have that info in them

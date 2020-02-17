@@ -14,7 +14,7 @@ source:
     sha256: 63df418a859d0a463347f95ded5cd88a3dd3aaa1ceecaeee362194bc30f3e386
 
 build:
-  number: 0
+  number: 1005
   detect_binary_files_with_prefix: true
   run_exports:
     # pin to major.minor because library names have that info in them
@@ -31,8 +31,12 @@ requirements:
   host:
     - zlib  # [unix]
     - xorg-libx11                        # [osx]
+    - xorg-libxft                        # [osx]
+    - fontconfig                         # [osx]
   run:
     - xorg-libx11                        # [osx]
+    - xorg-libxft                        # [osx]
+    - fontconfig                         # [osx]
 
 test:
 

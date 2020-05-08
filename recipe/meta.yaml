@@ -30,10 +30,9 @@ requirements:
     - make                               # [linux]
   host:
     - zlib  # [unix]
-    run_exports:
-      - freetype  # [unix]
-      - fontconfig  # [unix]
-      - xorg-libxft  # [unix]
+    - freetype
+    - fontconfig
+    - xorg-libxft
 
 test:
 

@@ -32,7 +32,9 @@ requirements:
     - zlib  # [unix]
     - freetype
     - fontconfig
-    - xorg-libxft
+    - xorg-libxft  # [not win]
+  run:
+    - xorg-libxft  # [not win]
 
 test:
 

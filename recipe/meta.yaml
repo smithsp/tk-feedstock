@@ -27,14 +27,12 @@ requirements:
     - {{ cdt('libx11-devel') }}          # [linux]
     - {{ cdt('libxcb') }}                # [linux]
     - {{ cdt('libxau') }}                # [linux]
+    - {{ cdt('libxft') }}                # [linux]
     - make                               # [linux]
   host:
     - zlib  # [unix]
     - freetype
     - fontconfig
-    - xorg-libxft  # [not win]
-  run:
-    - xorg-libxft  # [not win]
 
 test:
 

@@ -88,7 +88,7 @@ test:
 
 about:
   home: http://www.tcl.tk/
-  license: Tcl/Tk
+  license: TCL
   license_family: BSD
   license_file: tcl{{ version }}/license.terms
   summary: A dynamic programming language with GUI support.  Bundles Tcl and Tk.

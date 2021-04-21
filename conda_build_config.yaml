@@ -1,2 +1,0 @@
-CONDA_BUILD_SYSROOT:
-  - /Users/lloyd/code/packaging/MacOSX10.9.sdk        # [osx]

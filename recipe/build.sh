@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo pineapple
-echo ${PREFIX}
-echo ${CONDA_PREFIX}
-
 IFS="." read -a VER_ARR <<<"${PKG_VERSION}"
 
 ARCH_FLAG=""

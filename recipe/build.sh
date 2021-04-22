@@ -21,7 +21,7 @@ pushd tk${PKG_VERSION}/unix
   ./configure --prefix="${PREFIX}"        \
               --host=${HOST}              \
               --with-tcl="${PREFIX}"/lib  \
-              --enable-aqua=no           \
+              --enable-aqua=${BUILD_AQUA} \
               ${ARCH_FLAG}
   make -j${CPU_COUNT} ${VERBOSE_AT}
   make install

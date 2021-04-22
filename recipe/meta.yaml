@@ -13,12 +13,36 @@ source:
     folder: tk{{ version }}
     sha256: 63df418a859d0a463347f95ded5cd88a3dd3aaa1ceecaeee362194bc30f3e386
 
+# Needed for conda-smithy linting
+{% set tk_aqua = tk_aqua or 'aqua' %}
+
+# Set the build number
+{% set build = 2 %}
+
+# Prioritize the aqua version
+{% if tk_aqua == 'aqua' %}
+{% set build = build + 100 %}
+{% endif %}
+
 build:
-  number: 2
+  number: {{ build }}
   detect_binary_files_with_prefix: true
   run_exports:
     # pin to major.minor because library names have that info in them
     - {{ pin_subpackage('tk', max_pin='x.x') }}
+  {% if tk_aqua == 'noaqua' %}
+  {% set aqua_prefix = "noaqua_" %}
+  {% else %}
+  {% set aqua_prefix = "" %}
+  {% endif %}
+  string: "{{ aqua_prefix }}h{{ PKG_HASH }}_{{ build }}"
+
+  script_env:
+    {% if tk_aqua == 'noaqua' %}
+    - BUILD_AQUA=no
+    {% else %}
+    - BUILD_AQUA=yes
+    {% endif %}
 
 requirements:
   build:
@@ -30,6 +54,7 @@ requirements:
     - make                               # [linux]
   host:
     - zlib  # [unix]
+{% if tk_aqua == 'noaqua' %}
     - xorg-libx11                        # [osx]
     - xorg-libxft                        # [osx]
     - fontconfig                         # [osx]
@@ -37,6 +62,7 @@ requirements:
     - xorg-libx11                        # [osx]
     - xorg-libxft                        # [osx]
     - fontconfig                         # [osx]
+{% endif %}
 
 test:
 
